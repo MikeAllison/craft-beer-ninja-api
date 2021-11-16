@@ -1,17 +1,13 @@
 const express = require('express');
 
+const Place = require('./models/place');
+
 const app = express();
 
 app.use(express.json());
 
-app.get('/api/search', (req, res) => {
-  const places = [];
-
-  places.push(
-    { id: '1', name: 'Solid State' },
-    { id: '2', name: 'Sweet Avenue' },
-    { id: '3', name: 'Astoria Bier & Cheese' }
-  );
+app.get('/api/v1/search', (req, res) => {
+  const places = Place.all();
 
   res.status(200).json(places);
 });
