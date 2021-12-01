@@ -76,7 +76,7 @@ app.get('/api/v1/places', (req, res) => {
             console.log('CALLING REQ NEXT PAGE');
             next_page_token = requestNextPage(response.data.next_page_token);
             console.log('AFTER REQ NEXT PAGE');
-            console.log(next_page_token);
+            console.log(next_page_token); // TO-FIX:  This gets called before requestNextPage() returns
           }, 5000);
         }
       })
