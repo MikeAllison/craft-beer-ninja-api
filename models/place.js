@@ -4,7 +4,7 @@ module.exports = class Place {
     this.name = name;
   }
 
-  static all() {
+  static findAll() {
     return [
       { id: '1', name: 'Solid State' },
       { id: '2', name: 'Sweet Avenue' },
