@@ -22,8 +22,6 @@ exports.requestPlaces = (req, res, next) => {
       });
   }
 
-  // then
-
   // next_page_token request
   //`https://maps.googleapis.com/maps/api/place/nearbysearch/json?pagetoken=${nextPageToken}&key=${process.env.GOOGLE_API_KEY}`
 };
