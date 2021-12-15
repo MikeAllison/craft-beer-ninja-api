@@ -7,17 +7,12 @@ module.exports = {
       const rankby = 'distance';
 
       axios
-        .get(
-          `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates.lat},${coordinates.lng}&keyword=${keyword}&rankby=${rankby}&key=${process.env.GOOGLE_API_KEY}`
-        )
+        .get(`https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${coordinates.lat},${coordinates.lng}&keyword=${keyword}&rankby=${rankby}&key=${process.env.GOOGLE_API_KEY}`)
         .then(response => {
           if (response.data.status === 'OK') {
             // console.log('PLACES UTIL STATUS=OK');
             // console.log(response.data);
-            resolve({
-              results: response.data.results,
-              next_page_token: response.data.next_page_token,
-            });
+            resolve(response.data);
           } else if (response.data.status === 'ZERO_RESULTS') {
             console.log('PLACES UTIL STATUS=ZERO_RESULTS');
             resolve({ results: [], next_page_token: null });
@@ -40,5 +35,5 @@ module.exports = {
           reject(error);
         });
     });
-  },
+  }
 };
