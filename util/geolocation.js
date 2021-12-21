@@ -7,8 +7,6 @@ module.exports = {
         .get(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.GOOGLE_API_KEY}`)
         .then(response => {
           if (response.data.status === 'OK') {
-            // console.log('GEOLOCATE UTIL STATUS=OK');
-            // console.log(response.data.results[0]);
             const results = response.data.results[0];
 
             resolve({

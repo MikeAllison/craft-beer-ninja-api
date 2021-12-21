@@ -9,8 +9,6 @@ exports.formSearch = (req, res, next) => {
       return googlePlacesUtil.nearbyPlacesSearch(geoResults.coordinates);
     })
     .then(googlePlaceResults => {
-      // console.log('/SEARCH RESULTS');
-      // console.log(placesResults);
       const operationalPlaces = [];
       googlePlaceResults.results.forEach(place => {
         if (place.business_status === 'OPERATIONAL') {
@@ -20,8 +18,8 @@ exports.formSearch = (req, res, next) => {
       res.status(200).json({ places: operationalPlaces, next_page_token: googlePlaceResults.next_page_token });
     })
     .catch(error => {
-      console.log('/SEARCH CALL TO GEOLOCATE UTIL .catch()');
       console.log(error);
+      res.status(500);
     });
 
   // next_page_token request
@@ -29,5 +27,19 @@ exports.formSearch = (req, res, next) => {
 };
 
 exports.geoSearch = (req, res, next) => {
-  res.status(200).json({ places: 'TO-DO: /geo-search', next_page_token: 'TO-DO: /geo-search' });
+  googlePlacesUtil
+    .nearbyPlacesSearch(req.body.coordinates)
+    .then(googlePlaceResults => {
+      const operationalPlaces = [];
+      googlePlaceResults.results.forEach(place => {
+        if (place.business_status === 'OPERATIONAL') {
+          operationalPlaces.push({ place_id: place.place_id, name: place.name });
+        }
+      });
+      res.status(200).json({ places: operationalPlaces, next_page_token: googlePlaceResults.next_page_token });
+    })
+    .catch(error => {
+      console.log(error);
+      res.status(500);
+    });
 };
