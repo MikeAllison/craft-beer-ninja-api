@@ -4,6 +4,7 @@ const searchController = require('../controllers/search');
 
 const router = express.Router();
 
-router.post('/', searchController.requestPlaces);
+router.post('/form-search', searchController.formSearch);
+router.post('/geo-search', searchController.geoSearch);
 
 module.exports = router;

@@ -3,7 +3,7 @@ const axios = require('axios');
 module.exports = {
   nearbyPlacesSearch: coordinates => {
     return new Promise((resolve, reject) => {
-      const keyword = 'craft_beer';
+      const keyword = 'craft beer';
       const rankby = 'distance';
 
       axios
