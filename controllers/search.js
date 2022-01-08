@@ -3,9 +3,12 @@ const geolocationUtil = require('../util/geolocation');
 const googlePlacesUtil = require('../util/google-places');
 
 exports.formSearch = (req, res, next) => {
+  let formattedAddress;
+
   geolocationUtil
     .geolocate(req.body.searchLocation)
     .then(geoResults => {
+      formattedAddress = geoResults.formattedAddress;
       return googlePlacesUtil.nearbyPlacesSearch(geoResults.coordinates);
     })
     .then(googlePlaceResults => {
@@ -19,8 +22,9 @@ exports.formSearch = (req, res, next) => {
         }
       });
       res.status(200).json({
+        formattedAddress: formattedAddress,
         places: operationalPlaces,
-        next_page_token: googlePlaceResults.next_page_token
+        nextPageToken: googlePlaceResults.next_page_token
       });
     })
     .catch(error => {
@@ -30,8 +34,14 @@ exports.formSearch = (req, res, next) => {
 };
 
 exports.geoSearch = (req, res, next) => {
-  googlePlacesUtil
-    .nearbyPlacesSearch(req.body.coordinates)
+  let formattedAddress;
+
+  geolocationUtil
+    .reverseGeocode(req.body.coordinates)
+    .then(reverseGeoResults => {
+      formattedAddress = reverseGeoResults.formattedAddress;
+      return googlePlacesUtil.nearbyPlacesSearch(req.body.coordinates);
+    })
     .then(googlePlaceResults => {
       const operationalPlaces = [];
       googlePlaceResults.results.forEach(place => {
@@ -43,8 +53,9 @@ exports.geoSearch = (req, res, next) => {
         }
       });
       res.status(200).json({
+        formattedAddress: formattedAddress,
         places: operationalPlaces,
-        next_page_token: googlePlaceResults.next_page_token
+        nextPageToken: googlePlaceResults.next_page_token
       });
     })
     .catch(error => {
@@ -68,7 +79,7 @@ exports.morePlacesSearch = (req, res, next) => {
       });
       res.status(200).json({
         places: operationalPlaces,
-        next_page_token: googlePlaceResults.next_page_token
+        nextPageToken: googlePlaceResults.next_page_token
       });
     })
     .catch(error => {
