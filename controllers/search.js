@@ -28,6 +28,7 @@ exports.formSearch = (req, res, next) => {
       });
     })
     .catch(error => {
+      console.log(error);
       res.status(500).send(error);
     });
 };
@@ -58,6 +59,7 @@ exports.geoSearch = (req, res, next) => {
       });
     })
     .catch(error => {
+      console.log(error);
       res.status(500).send(error);
     });
 };
@@ -81,6 +83,7 @@ exports.morePlacesSearch = (req, res, next) => {
       });
     })
     .catch(error => {
+      console.log(error);
       res.status(500).send(error);
     });
 };
@@ -94,6 +97,7 @@ exports.placeDetailsSearch = (req, res, next) => {
       });
     })
     .catch(error => {
+      console.log(error);
       res.status(500).send(error);
     });
 };
