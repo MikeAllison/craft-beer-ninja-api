@@ -14,24 +14,17 @@ module.exports = {
           if (response.data.status === 'OK') {
             resolve(response.data);
           } else if (response.data.status === 'ZERO_RESULTS') {
-            console.log('PLACES UTIL STATUS=ZERO_RESULTS');
             resolve({ results: [], next_page_token: null });
           } else {
             // Return all other statuses
             if (response.data.error_message) {
-              console.log('PLACES UTIL STATUS=ERROR_MESSAGE');
-              console.log(response.data.error_message);
               reject(response.data.error_message);
             } else {
-              console.log('PLACES UTIL STATUS=ERROR_CATCH_ALL');
-              console.log(response.data);
               reject(response.data);
             }
           }
         })
         .catch(error => {
-          console.log('PLACES UTIL STATUS=GOOGLE PLACE SEARCH .catch()');
-          console.log(error);
           reject(error);
         });
     });
@@ -46,24 +39,17 @@ module.exports = {
           if (response.data.status === 'OK') {
             resolve(response.data.result);
           } else if (response.data.status === 'ZERO_RESULTS') {
-            console.log('PLACE DETAILS STATUS=ZERO_RESULTS');
             resolve({});
           } else {
             // Return all other statuses
             if (response.data.error_message) {
-              console.log('PLACE DETAILS STATUS=ERROR_MESSAGE');
-              console.log(response.data.error_message);
               reject(response.data.error_message);
             } else {
-              console.log('PLACE DETAILS STATUS=ERROR_CATCH_ALL');
-              console.log(response.data);
               reject(response.data);
             }
           }
         })
         .catch(error => {
-          console.log('PLACE DETAILS STATUS=GOOGLE PLACE SEARCH .catch()');
-          console.log(error);
           reject(error);
         });
     });
@@ -78,24 +64,17 @@ module.exports = {
           if (response.data.status === 'OK') {
             resolve(response.data);
           } else if (response.data.status === 'ZERO_RESULTS') {
-            console.log('PLACES UTIL STATUS=ZERO_RESULTS');
             resolve({ results: [], next_page_token: null });
           } else {
             // Return all other statuses
             if (response.data.error_message) {
-              console.log('PLACES UTIL STATUS=ERROR_MESSAGE');
-              console.log(response.data.error_message);
               reject(response.data.error_message);
             } else {
-              console.log('PLACES UTIL STATUS=ERROR_CATCH_ALL');
-              console.log(response.data);
               reject(response.data);
             }
           }
         })
         .catch(error => {
-          console.log('PLACES UTIL STATUS=GOOGLE PLACE SEARCH .catch()');
-          console.log(error);
           reject(error);
         });
     });

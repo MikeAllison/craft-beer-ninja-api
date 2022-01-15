@@ -14,28 +14,18 @@ module.exports = {
               coordinates: response.data.results[0].geometry.location
             });
           } else if (response.data.status === 'ZERO_RESULTS') {
-            console.log('GEOLOCATE UTIL STATUS=ZERO_RESULTS');
-            resolve({
-              formattedAddress: 'No Formatted Address',
-              coordinates: 'No Coordinates'
-            });
+            reject(response.data.status);
           } else {
             // Return all other statuses
             if (response.data.error_message) {
-              console.log('GEOLOCATE UTIL STATUS=ERROR_MESSAGE');
-              console.log(response.data.error_message);
-              reject(new Error(response.data.error_message));
+              reject(response.data.error_message);
             } else {
-              console.log('GEOLOCATE UTIL STATUS=ERROR_CATCH_ALL');
-              console.log(response.data);
-              reject(new Error(response.data));
+              reject(response.data.error_message);
             }
           }
         })
         .catch(error => {
-          console.log('GEOLOCATE UTIL GOOGLE API CATCH');
-          console.log(error);
-          return reject(new Error(error));
+          reject(error);
         });
     });
   },
@@ -51,25 +41,18 @@ module.exports = {
               formattedAddress: response.data.results[0].formatted_address
             });
           } else if (response.data.status === 'ZERO_RESULTS') {
-            console.log('GEOCODE-REVERSE UTIL STATUS=ZERO_RESULTS');
-            resolve({ formattedAddress: 'No Formatted Address' });
+            reject(response.data.status);
           } else {
             // Return all other statuses
             if (response.data.error_message) {
-              console.log('GEOCODE-REVERSE UTIL STATUS=ERROR_MESSAGE');
-              console.log(response.data.error_message);
-              reject(new Error(response.data.error_message));
+              reject(response.data.error_message);
             } else {
-              console.log('GEOCODE-REVERSE UTIL STATUS=ERROR_CATCH_ALL');
-              console.log(response.data);
-              reject(new Error(response.data));
+              reject(response.data.error_message);
             }
           }
         })
         .catch(error => {
-          console.log('GEOCODE-REVERSE UTIL GOOGLE API CATCH');
-          console.log(error);
-          return reject(new Error(error));
+          reject(error);
         });
     });
   }
