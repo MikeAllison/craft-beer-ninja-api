@@ -30,6 +30,7 @@ module.exports = {
         });
     });
   },
+
   placeDetailsSearch: placeId => {
     return new Promise((resolve, reject) => {
       axios
@@ -56,6 +57,7 @@ module.exports = {
         });
     });
   },
+
   morePlacesSearch: nextPageToken => {
     return new Promise((resolve, reject) => {
       axios

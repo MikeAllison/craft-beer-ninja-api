@@ -30,6 +30,7 @@ module.exports = {
         });
     });
   },
+
   reverseGeocode: coordinates => {
     return new Promise((resolve, reject) => {
       axios
@@ -39,6 +40,10 @@ module.exports = {
         .then(response => {
           if (response.data.status === 'OK') {
             resolve({
+              coordinates: {
+                lat: coordinates.lat,
+                lng: coordinates.lng
+              },
               formattedAddress: response.data.results[0].formatted_address
             });
           } else if (response.data.status === 'ZERO_RESULTS') {
