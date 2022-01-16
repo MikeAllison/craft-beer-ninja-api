@@ -1,7 +1,7 @@
 {
   "name": "craft-beer-ninja-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "API for Craft Beer Ninja",
   "main": "index.js",
   "scripts": {
     "dev": "nodemon -r dotenv/config index.js",
